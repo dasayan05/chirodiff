@@ -1,0 +1,13 @@
+ndjson
+scipy
+matplotlib
+tqdm
+Pillow
+pytorch-lightning==1.5.9
+simplification
+noise
+torch-ema
+omegaconf
+jsonargparse[signatures]
+shapely
+wandb

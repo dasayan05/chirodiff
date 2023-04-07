@@ -1,0 +1,104 @@
+seed_everything: null
+trainer:
+  logger:
+    class_path: utils.CustomWandbLogger
+    init_args:
+      entity: # TODO: fill these two ..
+      project: # .. entires yourself.
+      offline: true
+      log_model: false
+      save_dir: ./logs/
+      name: test-run
+      group: test
+  
+  process_position: 0
+  num_nodes: 1
+  accelerator: gpu
+  devices: 1
+  auto_select_gpus: true
+
+  gradient_clip_algorithm: norm
+  enable_progress_bar: true
+  overfit_batches: 0.0
+  track_grad_norm: -1
+  check_val_every_n_epoch: 1
+  fast_dev_run: false
+  accumulate_grad_batches: 1
+  max_epochs: 100000
+  limit_train_batches: 1.0
+  limit_val_batches: 1.0
+  limit_test_batches: 1.0
+  log_every_n_steps: 8
+  strategy: dp
+  sync_batchnorm: false
+  enable_model_summary: true
+  weights_summary: top
+  num_sanity_val_steps: 0
+  profiler: null
+  benchmark: false
+  deterministic: false
+  detect_anomaly: false
+  auto_scale_batch_size: false
+  prepare_data_per_node: null
+  plugins: null
+  amp_backend: native
+  amp_level: null
+  move_metrics_to_cpu: false
+  stochastic_weight_avg: false
+
+  gradient_clip_val: 0.1
+  precision: 16
+
+model:
+  repr: ${data.init_args.repr}
+  modeltype: birnn
+  time_embedding: randomfourier
+
+  optim_ema: true
+  optim_lr: 1.e-3
+  optim_gamma: 0.9995
+  optim_warmup: 15000
+  optim_sched: steplr
+  optim_interval: epoch
+  optim_div_factor: 2
+  optim_decay: 1.e-2
+  
+  arch_parameterization: eps
+  arch_dropout: 0.
+  arch_pe_dim: 8
+  arch_head: 4
+  arch_layer: 3
+  arch_internal: 96
+
+  # conditioning model arch
+  arch_layer_cond: 3
+  arch_internal_cond: 112
+  arch_n_cond_latent: 96
+  
+  noise_T: 35
+  noise_low_noise: 1.e-4
+  noise_high_noise: 2.e-2
+  noise_schedule: linear
+
+  test_variance_strength: 0.75
+  test_sampling_algo: ddpm
+  test_n_viz: 10
+  test_n_sample_viz: 10
+  test_recon: true
+  test_interp: false
+
+data:
+  class_path: data.dm.QuickDrawDM
+  init_args:
+    root_dir: # TODO: path to the <category>_<mode>.npz file
+    repr: threeseqabs
+
+    split_fraction: 0.85
+    perlin_noise: 0.1
+    split_seed: 5555
+    num_workers: 4
+    batch_size: 128
+    max_strokes: 20
+    max_sketches: 100000
+
+ckpt_path: null
