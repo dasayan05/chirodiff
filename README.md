@@ -13,7 +13,7 @@ Authors: [Ayan Das](https://ayandas.me/), [Yongxin Yang](https://yang.ac/), [Tim
 
 <h3>
 <p align="center">
-    [<a href="https://openreview.net/pdf?id=1ROAstc9jv">OpenReview</a>], [<a href="#">arXiv</a>] & [<a href="https://ayandas.me/chirodiff">Project Page</a>]
+    [<a href="https://openreview.net/pdf?id=1ROAstc9jv">OpenReview</a>], [<a href="https://arxiv.org/abs/2304.03785">arXiv</a>] & [<a href="https://ayandas.me/chirodiff">Project Page</a>]
 </p>
 </h3>
 
